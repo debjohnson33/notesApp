@@ -4,6 +4,7 @@
   "description": "Store notes",
   "main": "notes.js",
   "scripts": {
+    "start": "NODE_ENV=test npx notes",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
