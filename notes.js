@@ -13,8 +13,15 @@ document.addEventListener("DOMContentLoaded", () => {
       editBtn.innerHTML = "Edit";
       editBtn.id = index;
       editBtn.setAttribute("onclick", "editNote(event, this.id)");
+      let deleteBtn = document.createElement("button");
+      deleteBtn.id = "delete" + index;
+      deleteBtn.innerHTML = "Delete Item";
+      deleteBtn.onclick = function() {
+        deleteNote(event, index);
+      }
       listItem.innerHTML = note;
       listItem.appendChild(editBtn);
+      listItem.appendChild(deleteBtn);
       list.appendChild(listItem);
     });
   }
@@ -57,5 +64,11 @@ const submitEdit = (event, id) => {
   window.localStorage.setItem("notes", JSON.stringify(notes));
 };
 
+const deleteNote = (event, id) => {
 
+  let index = Number(id);
+  notes.splice(index, 1);
+  console.log(notes);
+  window.localStorage.setItem("notes", JSON.stringify(notes));
+};
 
