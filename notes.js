@@ -1,6 +1,6 @@
 // User can create a note - How to persist a list of them - use stringify/parse to put array into localStorage - DONE
-// User can edit a note
-// User can delete a note
+// User can edit a note - DONE
+// User can delete a note - ? Deletes from localStorage but doesn't reload to remove the deleted note
 // When closing the browser window the notes will be stored and when the User returns, the data will be retrieved
 const notes = JSON.parse(window.localStorage.getItem('notes')) || [];
 
@@ -34,9 +34,6 @@ const createNote = () => {
 };
 
 const editNote = (event, id) => {
-  // retrieve index of current text in list
-  // change that index to hold newText
-  console.log(id);
   let index = Number(id);
   const list = document.getElementsByTagName("ul")[0];
   let editForm = document.createElement("form");
@@ -55,20 +52,15 @@ const editNote = (event, id) => {
 };
 
 const submitEdit = (event, id) => {
-
   let newText = document.getElementById("newText").value;
-  console.log(newText);
   let index = Number(id);
   notes[index] = newText;
-
   window.localStorage.setItem("notes", JSON.stringify(notes));
 };
 
 const deleteNote = (event, id) => {
-
   let index = Number(id);
   notes.splice(index, 1);
-  console.log(notes);
   window.localStorage.setItem("notes", JSON.stringify(notes));
 };
 
