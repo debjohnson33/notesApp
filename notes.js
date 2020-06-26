@@ -31,13 +31,30 @@ const editNote = (event, id) => {
   // change that index to hold newText
   console.log(id);
   let index = Number(id);
-  let li = document.getElementById(index);
+  const list = document.getElementsByTagName("ul")[0];
+  let editForm = document.createElement("form");
   let inputBox = document.createElement("input");
   inputBox.type = "text";
-  li.appendChild(inputBox);
+  inputBox.value = notes[index];
+  inputBox.id = "newText";
+  editForm.appendChild(inputBox);
   let submit = document.createElement("button");
-  submit.innerHTML = "Submit";
-  inputBox.appendChild(submit);
+  submit.innerHTML = "Submit Edit";
+  submit.onclick = function() {
+    submitEdit(event, index);
+  }
+  editForm.appendChild(submit);
+  list.appendChild(editForm);
+};
+
+const submitEdit = (event, id) => {
+
+  let newText = document.getElementById("newText").value;
+  console.log(newText);
+  let index = Number(id);
+  notes[index] = newText;
+
+  window.localStorage.setItem("notes", JSON.stringify(notes));
 };
 
 
