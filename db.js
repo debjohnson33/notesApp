@@ -16,3 +16,5 @@ export const getNotes = async () => {
   client.close();
   return result;
 }
+
+export default { getNotes };
