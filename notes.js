@@ -8,9 +8,14 @@ document.addEventListener("DOMContentLoaded", () => {
   if (notes !== []) {
     console.log(notes);
     const list = document.getElementsByTagName("ul")[0];
-    notes.map(note => {
+    notes.map((note, index) => {
       let listItem = document.createElement("li");
+      let editBtn = document.createElement("button");
+      editBtn.innerHTML = "Edit";
+      editBtn.id = "btn-" + index;
+      editBtn.setAttribute("onclick", "editNote(event)");
       listItem.innerHTML = note;
+      listItem.appendChild(editBtn);
       list.appendChild(listItem);
     });
   }
@@ -20,6 +25,12 @@ const createNote = () => {
   let text = document.getElementById("note-text").value;
   notes.push(text);
   window.localStorage.setItem("notes", JSON.stringify(notes));
+};
+
+const editNote = () => {
+  // retrieve index of current text in list
+
+  // change that index to hold newText
 };
 
 
