@@ -7,6 +7,12 @@ const notes = JSON.parse(window.localStorage.getItem('notes')) || [];
 document.addEventListener("DOMContentLoaded", () => {
   if (notes !== []) {
     console.log(notes);
+    const list = document.getElementsByTagName("ul")[0];
+    notes.map(note => {
+      let listItem = document.createElement("li");
+      listItem.innerHTML = note;
+      list.appendChild(listItem);
+    });
   }
 });
 
