@@ -14,12 +14,11 @@ document.addEventListener("DOMContentLoaded", () => {
       editBtn.id = index;
       editBtn.setAttribute("onclick", "editNote(event, this.id)");
       let deleteBtn = document.createElement("button");
-      deleteBtn.id = "delete" + index;
+      deleteBtn.id = index;
       deleteBtn.innerHTML = "Delete Item";
-      deleteBtn.onclick = function() {
-        deleteNote(event, index);
-      }
+      deleteBtn.setAttribute("onclick", "deleteNote(event, this.id)");
       listItem.innerHTML = note;
+      listItem.id = index;
       listItem.appendChild(editBtn);
       listItem.appendChild(deleteBtn);
       list.appendChild(listItem);
@@ -60,7 +59,46 @@ const submitEdit = (event, id) => {
 
 const deleteNote = (event, id) => {
   let index = Number(id);
+  let listItem = document.getElementById(index);
+  let p = document.createElement("p");
+  p.innerHTML = "Are you sure you want to delete?";
+  listItem.appendChild(p);
+  let yes = document.createElement("button");
+  yes.innerHTML = "Yes";
+  yes.id = "yes";
+  yes.onclick = function() {
+    submitDelete(event, index);
+  }
+  listItem.appendChild(yes);
+  let no = document.createElement("button");
+  no.innerHTML = "No";
+  no.id = "no";
+  no.onclick = function() {
+    submitCancel(event, index);
+  }
+  listItem.appendChild(no);
+};
+
+const submitDelete = (event, id) => {
+  let index = Number(id);
   notes.splice(index, 1);
+  let listItem = document.getElementById(index);
+  let p = document.getElementsByTagName("p")[0];
+  let yes = document.getElementById("yes");
+  let no = document.getElementById("no");
+  listItem.remove();
+  p.remove();
+  yes.remove();
+  no.remove();
   window.localStorage.setItem("notes", JSON.stringify(notes));
 };
+
+const submitCancel = (event, id) => {
+  let p = document.getElementsByTagName("p")[0];
+  let yes = document.getElementById("yes");
+  let no = document.getElementById("no");
+  p.remove();
+  yes.remove();
+  no.remove();
+}
 
