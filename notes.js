@@ -1,7 +1,7 @@
 // User can create a note - How to persist a list of them - use stringify/parse to put array into localStorage - DONE
 // User can edit a note - DONE
-// User can delete a note - ? Deletes from localStorage but doesn't reload to remove the deleted note
-// When closing the browser window the notes will be stored and when the User returns, the data will be retrieved
+// User can delete a note -  DONE
+// When closing the browser window the notes will be stored and when the User returns, the data will be retrieved - DONE
 const notes = JSON.parse(window.localStorage.getItem('notes')) || [];
 
 document.addEventListener("DOMContentLoaded", () => {
